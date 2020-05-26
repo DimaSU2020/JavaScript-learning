@@ -1,13 +1,18 @@
-let fizz = "Fizz";
-let buzz = "Buzz";
-for (let number = 1; number <= 100; number += 1) {
-    if (number % 3 == 0 && number % 5 == 0) {
-        console.log(fizz + buzz);
-    } else if (number % 3 == 0) {
-        console.log(fizz);
-    } else if (number % 5 == 0) {
-        console.log(buzz);
-    }   else {
-            console.log(number);   
-        }
+let size = 8;
+let numberLine = 0;
+let empty = " ";
+let grill = "#";
+let lineOut = "";
+for (let number = 0; number < ((size * size) / 2); number += 1) {
+    if (number % (size / 2) == 0) {
+        numberLine += 1;
+        lineOut = lineOut + '\n';   
+    } if (numberLine % 2 == 0) {
+        lineOut = lineOut + grill + empty;
+    }
+    else {
+        lineOut = lineOut + empty + grill;  
+    }
 }
+console.log(lineOut);
+
