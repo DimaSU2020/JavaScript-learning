@@ -1,8 +1,9 @@
-let size = 8;
+let size = 11;
 let numberLine = 0;
 let empty = " ";
 let grill = "#";
 let lineOut = "";
+if (size % 2 == 0) {
 for (let number = 0; number < ((size * size) / 2); number += 1) {
     if (number % (size / 2) == 0) {
         numberLine += 1;
@@ -15,4 +16,6 @@ for (let number = 0; number < ((size * size) / 2); number += 1) {
     }
 }
 console.log(lineOut);
-
+} else {
+    console.log('Ошибка! size должен быть чётным')
+}
