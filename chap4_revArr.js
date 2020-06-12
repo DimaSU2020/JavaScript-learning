@@ -1,20 +1,28 @@
-function range(start, end, step = 1) {
-    const move = step;
-    let arrayNum = [];
-    let number = start;
-    for (let index = number; index <= end; index += move) {
-        arrayNum.push(number);
-        number += move;
+function getRange(start, end, step = 1) {
+    const range = [];
+    for (let number = start; number <= end; number += step) {
+        range.push(number);
     }
-    return arrayNum;
+    return range;
 }
-console.log(range(2, 20));
+console.log(getRange(1, 6));
 
-function reverseArray(arrayNum) {
+function reverseArray(range) {
     let revArrTest = [];
-    arrayNum.forEach(function(item, index, arrayNum) {
-        revArrTest.unshift(arrayNum[index]);  
+    range.forEach(function(item, index, range) {
+        revArrTest.unshift(range[index]);  
     });
     return revArrTest;
 }
-console.log(reverseArray(range(2, 20)));
+console.log(reverseArray(getRange(1, 6)));
+
+function reverseArrayInPlace(range) {
+    let addNum = 0;
+    for (i = 0; i < Math.floor(range.length / 2); i++) {
+        addNum = range[i];
+        range[i] = range[range.length - 1 - i];
+        range[range.length - 1 - i] = addNum;
+    }
+    return range;
+}
+console.log(reverseArrayInPlace(getRange(1, 6)));

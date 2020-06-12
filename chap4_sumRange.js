@@ -1,19 +1,16 @@
-function range(start, end, step = 1) {
-  const move = step;
-  let arrayNum = [];
-  let number = start;
-  for (let index = number; index <= end; index += move) {
-    arrayNum.push(number);
-    number += move;
-  }
-  return arrayNum;
+function getRange(start, end, step = 1) {
+    const range = [];
+    for (let number = start; number <= end; number += step) {
+        range.push(number);
+    }
+    return range;
 }
-console.log(range(1, 10, 2));
+console.log(getRange(1, 10));
 
-function sum(arrayNum) {
-  let sumArray = 0;
-  arrayNum.forEach(function(item, index, arrayNum) {
-    sumArray += arrayNum[index] });
-  return sumArray;
+function sum(range) {
+    let sumArray = 0;
+    range.forEach(function(item, index, range) {
+      sumArray += range[index] });
+    return sumArray;
 }
-console.log(sum(range(1, 10, 2)));
+console.log(sum(getRange(1, 10)));
