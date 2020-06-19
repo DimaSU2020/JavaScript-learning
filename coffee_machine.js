@@ -6,7 +6,7 @@ const coffeeMachine = {
     coffeeBox: 0,
     coffeeBoxMax: 250,
     started: false,
-    kindDrink: ``,
+    drink: ``,
     americano: [200, 11],
     espresso: [30, 7],
     test: function() {
@@ -16,7 +16,7 @@ const coffeeMachine = {
         }   if (this.waterTank < 200 && this.waterTank >= 30 
                 && this.coffeeBox < 11 && this.coffeeBox >= 7) {
                 this.started = true;
-                this.kindDrink = `Espresso`;
+                this.drink = `Espresso`;
                 return console.log(this.mfr + ` ` + this.model + ` ` + `is ready to use: you can choose Espresso only`);
             }   if (this.waterTank < 30) {
                     this.started = false;
@@ -52,26 +52,24 @@ const coffeeMachine = {
     },
     prepare: function(drink) {
         if (this.started == true) {
-            if (drink == `Americano` && this.kindDrink !== `Espresso`) {
-                this.waterTank = this.waterTank - this.americano[0];
-                this.coffeeBox = this.coffeeBox - this.americano[1];
-                this.started = false;
-                return console.log(`Your Americano is ready ☕`);
+            switch (drink) {
+                case `Americano`:
+                    this.waterTank = this.waterTank - this.americano[0];
+                    this.coffeeBox = this.coffeeBox - this.americano[1];
+                    this.started = false;
+                    return console.log(`Your Americano is ready ☕`);
+                    break;
+                case `Espresso`:
+                    this.waterTank = this.waterTank - this.espresso[0];
+                    this.coffeeBox = this.coffeeBox - this.espresso[1];
+                    this.started = false;
+                    break;
+                default :
+                    this.started = false;
+                    return console.log(`Please repeat your choice. We make Americano or Espresso only`);
+                    break;
             }
-            if (kindDrink == `Espresso` || this.kindDrink == `Espresso`) {
-                this.waterTank = this.waterTank - this.espresso[0];
-                this.coffeeBox = this.coffeeBox - this.espresso[1];
-                this.started = false;
-                return console.log(`Your Espresso is ready ☕`);
-            } else {
-                this.started = false;
-                return console.log(`Please repeat your choice. We make Americano or Espresso only`);
-            }   
         }
-            else {
-                this.started = false;
-                return console.log(`Error! Try to turn on machine again, please`);
-            }
     },
 };
 coffee_machine.test();
