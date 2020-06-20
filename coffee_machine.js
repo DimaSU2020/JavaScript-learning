@@ -28,23 +28,24 @@ const coffeeMachine = {
         this.water = this.water + amount;
         const difference = this.water - this.waterMax;
         if (this.water <= this.waterMax) {
-            this.started = true;
-            return console.log(`Added` + ` ` + amount + 'l of water');
+            console.log(`Added` + ` ` + amount + 'l of water');
+            return this.started = true;
         }   else {
                 this.water = this.waterMax;
-                this.started = true;
-                return console.log(`Too much water! Return you ` + difference + 'l of water');
+                console.log(`Too much water! Return you ` + difference + 'l of water');
+                return this.started = true;
             }  
     },
     addCoffee: function(amount) {
         this.coffee = this.coffee + amount;
         const difference = this.coffee - this.coffeeMax;
         if (this.coffee <= this.coffeeMax) {
-            return console.log(`Added` + ` ` + amount + 'gr of coffee');
+            console.log(`Added` + ` ` + amount + 'gr of coffee');
+            return this.started = true;
         }   else {
                 this.coffee = this.coffeeMax;
-                this.started = true;
-                return console.log(`Too much coffee! Return you ` + difference + 'gr of coffee');
+                console.log(`Too much coffee! Return you ` + difference + 'gr of coffee');
+                return this.started = true;
             }
     },
     make: function(drinkType) {
