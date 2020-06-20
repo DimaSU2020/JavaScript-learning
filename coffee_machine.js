@@ -2,7 +2,7 @@ const coffeeMachine = {
     mfr: `Bosch`,
     model: `VeroCup100`,
     waterTank: 0,
-    waterTankCupacity: 1400,
+    waterTankMax: 1400,
     coffeeBox: 0,
     coffeeBoxMax: 250,
     started: false,
@@ -32,13 +32,13 @@ const coffeeMachine = {
     addWater: function(amount) {
         this.waterTank = this.waterTank + amount;
         if (this.waterTank <= this.waterTankMax) {
+            this.started = true;
             return console.log(`Added` + ` ` + amount + 'l of water');
         }   else {
                 this.waterTank = 0;
                 this.started = false;
                 return console.log(`Error! Too much water. Try it again, please`);
-            }
-        
+            }  
     },
     addCoffee: function(amount) {
         this.coffeeBox = this.coffeeBox + amount;
@@ -50,38 +50,39 @@ const coffeeMachine = {
                 return console.log(`Error! Too much coffee. Try it again, please`);
             }
     },
+    make: function(drinkType) {
+        this.waterTank = this.waterTank - drinkType[0];
+        this.coffeeBox = this.coffeeBox - drinkType[1];
+    },
     prepare: function(drink) {
         if (this.started == true) {
             switch (drink) {
                 case `Americano`:
-                    this.waterTank = this.waterTank - this.americano[0];
-                    this.coffeeBox = this.coffeeBox - this.americano[1];
-                    this.started = false;
-                    return console.log(`Your Americano is ready ☕`);
-                    break;
+                    this.make(this.americano);
+                    console.log(`Your Americano is ready ☕`);
+                break;
                 case `Espresso`:
-                    this.waterTank = this.waterTank - this.espresso[0];
-                    this.coffeeBox = this.coffeeBox - this.espresso[1];
-                    this.started = false;
-                    break;
+                    this.make(this.espresso);
+                    console.log(`Your Espresso is ready ☕`);
+                break;
                 default :
-                    this.started = false;
-                    return console.log(`Please repeat your choice. We make Americano or Espresso only`);
-                    break;
+                    console.log(`Please repeat your choice. We make Americano or Espresso only`);
+                break;
             }
         }
-    },
+    },   
 };
-coffee_machine.test();
-coffee_machine.addWater(5000);
-coffee_machine.test();
-coffee_machine.addWater(1400);
-coffee_machine.test();
-coffee_machine.addCoffee(500);
-coffee_machine.test();
-coffee_machine.addCoffee(250);
-coffee_machine.test();
-coffee_machine.prepare(`Americano`);
-coffee_machine.prepare(`Espresso`);
-console.log(coffee_machine.waterTank);
-console.log(coffee_machine.coffeeBox);
+
+
+coffeeMachine.test();
+coffeeMachine.addWater(1000);
+coffeeMachine.test();
+coffeeMachine.addCoffee(200);
+coffeeMachine.test();
+coffeeMachine.prepare(`Americano`);
+console.log(coffeeMachine.waterTank);
+console.log(coffeeMachine.coffeeBox);
+coffeeMachine.test();
+coffeeMachine.prepare(`Espresso`);
+console.log(coffeeMachine.waterTank);
+console.log(coffeeMachine.coffeeBox);
