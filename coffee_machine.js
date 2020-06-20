@@ -20,7 +20,7 @@ const coffeeMachine = {
                         console.log(`Coffee's box is empty. Add coffee, please!`);
                         return this.started = false;
                     }   else {
-                            console.log(`Error or clean a container`);
+                            console.log(`Error`);
                             return this.started = false;
                         }        
     },
@@ -73,20 +73,8 @@ const coffeeMachine = {
 coffeeMachine.prepare(`Americano`);
 console.log(coffeeMachine.water);
 console.log(coffeeMachine.coffee);
-coffeeMachine.prepare(`Espresso`);
-console.log(coffeeMachine.water);
-console.log(coffeeMachine.coffee);
-coffeeMachine.addWater(500);
+coffeeMachine.addWater(2000);
 coffeeMachine.addCoffee(30);
 coffeeMachine.prepare(`Americano`);
-console.log(coffeeMachine.water);
-console.log(coffeeMachine.coffee);
-coffeeMachine.prepare(`Espresso`);
-console.log(coffeeMachine.water);
-console.log(coffeeMachine.coffee);
-coffeeMachine.prepare(`Espresso`);
-console.log(coffeeMachine.water);
-console.log(coffeeMachine.coffee);
-coffeeMachine.prepare(`Espresso`);
 console.log(coffeeMachine.water);
 console.log(coffeeMachine.coffee);
