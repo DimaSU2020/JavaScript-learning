@@ -1,61 +1,58 @@
 const coffeeMachine = {
     mfr: `Bosch`,
     model: `VeroCup100`,
-    waterTank: 0,
-    waterTankMax: 1400,
-    coffeeBox: 0,
-    coffeeBoxMax: 250,
+    water: 0,
+    waterMax: 1400,
+    coffee: 0,
+    coffeeMax: 250,
     started: false,
     drink: ``,
     americano: [200, 11],
     espresso: [30, 7],
     test: function() {
-        if  (this.waterTank > 200 && this.coffeeBox > 11) {
-            this.started = true;
-            return console.log(this.mfr + ` ` + this.model + ` ` + `is ready to use: choose a drink, please:\nAmericano or Espresso`);
-        }   if (this.waterTank < 200 && this.waterTank >= 30 
-                && this.coffeeBox < 11 && this.coffeeBox >= 7) {
-                this.started = true;
-                this.drink = `Espresso`;
-                return console.log(this.mfr + ` ` + this.model + ` ` + `is ready to use: you can choose Espresso only`);
-            }   if (this.waterTank < 30) {
-                    this.started = false;
-                    return console.log(`Water's tank is empty. Add water, please!`);
-                }   if (this.coffeeBox < 7) {
-                        this.started = false;
-                        return console.log(`Coffee's box is empty. Add coffee, please!`);
+        if  (this.water >= 200 && this.coffee >= 11) {
+            console.log(this.mfr + ` ` + this.model + ` ` + `is ready to use: choose a drink, please:\nAmericano or Espresso`);
+            return this.started = true;
+        }   if (this.water < 200) {
+                console.log(`Water's tank is empty. Add water, please!`);
+                return this.started = false;
+                }   if (this.coffee < 11) {
+                        console.log(`Coffee's box is empty. Add coffee, please!`);
+                        return this.started = false;
                     }   else {
-                            this.started = false;
-                            return console.log(`Error or clean a container`);
+                            console.log(`Error or clean a container`);
+                            return this.started = false;
                         }        
     },
     addWater: function(amount) {
-        this.waterTank = this.waterTank + amount;
-        if (this.waterTank <= this.waterTankMax) {
+        this.water = this.water + amount;
+        const difference = this.water - this.waterMax;
+        if (this.water <= this.waterMax) {
             this.started = true;
             return console.log(`Added` + ` ` + amount + 'l of water');
         }   else {
-                this.waterTank = 0;
-                this.started = false;
-                return console.log(`Error! Too much water. Try it again, please`);
+                this.water = this.waterMax;
+                this.started = true;
+                return console.log(`Too much water! Return you ` + difference + 'l of water');
             }  
     },
     addCoffee: function(amount) {
-        this.coffeeBox = this.coffeeBox + amount;
-        if (this.coffeeBox <= this.coffeeBoxMax) {
+        this.coffee = this.coffee + amount;
+        const difference = this.coffee - this.coffeeMax;
+        if (this.coffee <= this.coffeeMax) {
             return console.log(`Added` + ` ` + amount + 'gr of coffee');
         }   else {
-                this.coffeeBox = 0;
-                this.started = false;
-                return console.log(`Error! Too much coffee. Try it again, please`);
+                this.coffee = this.coffeeMax;
+                this.started = true;
+                return console.log(`Too much coffee! Return you ` + difference + 'gr of coffee');
             }
     },
     make: function(drinkType) {
-        this.waterTank = this.waterTank - drinkType[0];
-        this.coffeeBox = this.coffeeBox - drinkType[1];
+        this.water = this.water - drinkType[0];
+        this.coffee = this.coffee - drinkType[1];
     },
     prepare: function(drink) {
-        if (this.started == true) {
+        if (this.test() === true) {
             switch (drink) {
                 case `Americano`:
                     this.make(this.americano);
@@ -73,16 +70,23 @@ const coffeeMachine = {
     },   
 };
 
-
-coffeeMachine.test();
-coffeeMachine.addWater(1000);
-coffeeMachine.test();
-coffeeMachine.addCoffee(200);
-coffeeMachine.test();
 coffeeMachine.prepare(`Americano`);
-console.log(coffeeMachine.waterTank);
-console.log(coffeeMachine.coffeeBox);
-coffeeMachine.test();
+console.log(coffeeMachine.water);
+console.log(coffeeMachine.coffee);
 coffeeMachine.prepare(`Espresso`);
-console.log(coffeeMachine.waterTank);
-console.log(coffeeMachine.coffeeBox);
+console.log(coffeeMachine.water);
+console.log(coffeeMachine.coffee);
+coffeeMachine.addWater(500);
+coffeeMachine.addCoffee(30);
+coffeeMachine.prepare(`Americano`);
+console.log(coffeeMachine.water);
+console.log(coffeeMachine.coffee);
+coffeeMachine.prepare(`Espresso`);
+console.log(coffeeMachine.water);
+console.log(coffeeMachine.coffee);
+coffeeMachine.prepare(`Espresso`);
+console.log(coffeeMachine.water);
+console.log(coffeeMachine.coffee);
+coffeeMachine.prepare(`Espresso`);
+console.log(coffeeMachine.water);
+console.log(coffeeMachine.coffee);
