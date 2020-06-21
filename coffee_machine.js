@@ -5,77 +5,81 @@ const coffeeMachine = {
     waterMax: 1400,
     coffee: 0,
     coffeeMax: 250,
-    started: false,
     drink: ``,
-    americano: [200, 11],
-    espresso: [30, 7],
+    americano: {
+        water: 200,
+        coffee: 11
+    },
+    espresso: {
+        water: 30,
+        coffee: 7
+    },
     test: function() {
-        if  (this.water >= 200 && this.coffee >= 11) {
-            console.log(this.mfr + ` ` + this.model + ` ` + `is ready to use: choose a drink, please:\nAmericano or Espresso`);
-            return this.started = true;
-        }   if (this.water < 200) {
-                console.log(`Water's tank is empty. Add water, please!`);
-                return this.started = false;
-                }   if (this.coffee < 11) {
-                        console.log(`Coffee's box is empty. Add coffee, please!`);
-                        return this.started = false;
-                    }   else {
-                            console.log(`Error`);
-                            return this.started = false;
-                        }        
+        if (this.water < 200) {
+            console.log(`Water's tank is empty. Add water, please!`);
+            return false;
+        }   
+        if (this.coffee < 11) {
+            console.log(`Coffee's box is empty. Add coffee, please!`);
+            return false;
+        }   
+        else {
+            console.log(`${this.mfr} ${this.model} is ready to use: choose a drink, please:\nAmericano or Espresso`);
+            return true;
+        }        
     },
     addWater: function(amount) {
         this.water = this.water + amount;
         const difference = this.water - this.waterMax;
         if (this.water <= this.waterMax) {
-            console.log(`Added` + ` ` + amount + 'l of water');
-            return this.started = true;
+            console.log(`Added ${amount}l of water`);
+            return true;
         }   else {
-                this.water = this.waterMax;
-                console.log(`Too much water! Return you ` + difference + 'l of water');
-                return this.started = true;
+            this.water = this.waterMax;
+            console.log(`Too much water! Return you ${difference}l of water`);
+            return true;
             }  
     },
     addCoffee: function(amount) {
         this.coffee = this.coffee + amount;
         const difference = this.coffee - this.coffeeMax;
         if (this.coffee <= this.coffeeMax) {
-            console.log(`Added` + ` ` + amount + 'gr of coffee');
-            return this.started = true;
+            console.log(`Added ${amount}gr of coffee`);
+            return true;
         }   else {
-                this.coffee = this.coffeeMax;
-                console.log(`Too much coffee! Return you ` + difference + 'gr of coffee');
-                return this.started = true;
+            this.coffee = this.coffeeMax;
+            console.log(`Too much coffee! Return you ${difference}gr of coffee`);
+            return true;
             }
     },
-    make: function(drinkType) {
-        this.water = this.water - drinkType[0];
-        this.coffee = this.coffee - drinkType[1];
+    makeDrink: function(drink) {
+        this.water = this.water - drink.water;
+        this.coffee = this.coffee - drink.coffee;
     },
     prepare: function(drink) {
-        if (this.test() === true) {
-            switch (drink) {
-                case `Americano`:
-                    this.make(this.americano);
-                    console.log(`Your Americano is ready ☕`);
-                break;
-                case `Espresso`:
-                    this.make(this.espresso);
-                    console.log(`Your Espresso is ready ☕`);
-                break;
-                default :
-                    console.log(`Please repeat your choice. We make Americano or Espresso only`);
-                break;
-            }
+        if (this.test() !== true) {
+            console.log(`Please repeat your choice. We make Americano or Espresso only`);
+            return;
+        }
+        switch (drink) {
+            case `Americano`:
+                this.makeDrink(this.americano);
+                console.log(`Your Americano is ready ☕`);
+            break;
+            case `Espresso`:
+                this.makeDrink(this.espresso);
+                console.log(`Your Espresso is ready ☕`);
+            break;
+            default :
         }
     },   
 };
 
-coffeeMachine.prepare(`Americano`);
+coffeeMachine.prepare('Americano');
 console.log(coffeeMachine.water);
 console.log(coffeeMachine.coffee);
 coffeeMachine.addWater(2000);
 coffeeMachine.addCoffee(30);
-coffeeMachine.prepare(`Americano`);
+coffeeMachine.prepare('Americano');
 console.log(coffeeMachine.water);
 console.log(coffeeMachine.coffee);
