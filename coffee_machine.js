@@ -29,28 +29,20 @@ const coffeeMachine = {
         }        
     },
     addWater: function(amount) {
-        this.water = this.water + amount;
-        const difference = this.water - this.waterMax;
-        if (this.water <= this.waterMax) {
-            console.log(`Added ${amount}l of water`);
-            return true;
-        }   else {
-            console.log(`Too much water! Return you ${difference}l of water`);
+        if (this.water + amount > this.waterMax) {
             this.water = this.waterMax;
-            return true;
-            }  
+        } else {
+            this.water = this.water + amount;
+        }
+            console.log('Water added');
     },
     addCoffee: function(amount) {
-        this.coffee = this.coffee + amount;
-        const difference = this.coffee - this.coffeeMax;
-        if (this.coffee <= this.coffeeMax) {
-            console.log(`Added ${amount}gr of coffee`);
-            return true;
-        }   else {
-            console.log(`Too much coffee! Return you ${difference}gr of coffee`);
+        if (this.coffee + amount > this.coffeeMax) {
             this.coffee = this.coffeeMax;
-            return true;
-            }
+        } else {
+            this.coffee = this.coffee + amount;
+        }
+            console.log('Coffee added');
     },
     makeDrink: function(drink) {
         this.water = this.water - drink.water;
@@ -79,10 +71,10 @@ coffeeMachine.prepare('Americano');
 console.log(coffeeMachine.water);
 console.log(coffeeMachine.coffee);
 coffeeMachine.addWater(2000);
+coffeeMachine.prepare('Americano');
 coffeeMachine.addCoffee(30);
 coffeeMachine.prepare('Americano');
 console.log(coffeeMachine.water);
 console.log(coffeeMachine.coffee);
 coffeeMachine.prepare('Capucino');
-console.log(coffeeMachine.water);
-console.log(coffeeMachine.coffee);
+
