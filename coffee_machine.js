@@ -8,11 +8,11 @@ const coffeeMachine = {
     drink: ``,
     americano: {
         water: 200,
-        coffee: 11
+        coffee: 11,
     },
     espresso: {
         water: 30,
-        coffee: 7
+        coffee: 7,
     },
     test: function() {
         if (this.water < 200) {
@@ -35,8 +35,8 @@ const coffeeMachine = {
             console.log(`Added ${amount}l of water`);
             return true;
         }   else {
-            this.water = this.waterMax;
             console.log(`Too much water! Return you ${difference}l of water`);
+            this.water = this.waterMax;
             return true;
             }  
     },
@@ -47,8 +47,8 @@ const coffeeMachine = {
             console.log(`Added ${amount}gr of coffee`);
             return true;
         }   else {
-            this.coffee = this.coffeeMax;
             console.log(`Too much coffee! Return you ${difference}gr of coffee`);
+            this.coffee = this.coffeeMax;
             return true;
             }
     },
@@ -58,19 +58,19 @@ const coffeeMachine = {
     },
     prepare: function(drink) {
         if (this.test() !== true) {
-            console.log(`Please repeat your choice. We make Americano or Espresso only`);
             return;
         }
         switch (drink) {
-            case `Americano`:
+            case 'Americano':
                 this.makeDrink(this.americano);
-                console.log(`Your Americano is ready ☕`);
+                console.log('Your Americano is ready ☕');
             break;
-            case `Espresso`:
+            case 'Espresso':
                 this.makeDrink(this.espresso);
-                console.log(`Your Espresso is ready ☕`);
+                console.log('Your Espresso is ready ☕');
             break;
             default :
+            console.log('Error! Repeat your choice, please. \nWe make Americano or Espresso only');
         }
     },   
 };
@@ -81,5 +81,8 @@ console.log(coffeeMachine.coffee);
 coffeeMachine.addWater(2000);
 coffeeMachine.addCoffee(30);
 coffeeMachine.prepare('Americano');
+console.log(coffeeMachine.water);
+console.log(coffeeMachine.coffee);
+coffeeMachine.prepare('Capucino');
 console.log(coffeeMachine.water);
 console.log(coffeeMachine.coffee);
